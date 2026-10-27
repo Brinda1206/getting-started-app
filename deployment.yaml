@@ -23,3 +23,10 @@ spec:
                 name: todo-config
             - secretRef:
                 name: todo-secret
+          volumeMounts:
+            - name: todo-storage
+              mountPath: /etc/todos
+      volumes:
+        - name: todo-storage
+          persistentVolumeClaim:
+            claimName: todo-data
