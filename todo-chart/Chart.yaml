@@ -1,0 +1,5 @@
+apiVersion: v2
+name: todo-chart
+description: Helm chart for my-todo-app
+version: 0.1.0
+appVersion: "1.0"

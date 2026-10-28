@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-todo-app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: my-todo-app
+  template:
+    metadata:
+      labels:
+        app: my-todo-app
+    spec:
+      containers:
+        - name: my-todo-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.port }}
+          envFrom:
+            - configMapRef:
+                name: todo-config
+            - secretRef:
+                name: todo-secret
+          volumeMounts:
+            - name: todo-storage
+              mountPath: /etc/todos
+      volumes:
+        - name: todo-storage
+          persistentVolumeClaim:
+            claimName: todo-data

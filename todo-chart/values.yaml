@@ -1,0 +1,7 @@
+replicaCount: 1
+image:
+  repository: my-todo-app
+  tag: latest
+  pullPolicy: Never
+port: 3000
+storage: 1Gi
